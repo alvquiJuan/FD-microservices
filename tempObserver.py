@@ -15,10 +15,11 @@ class temperatureObserver :
     value stores the temperature last measured (or simulated variable)
     uid stores an unique identifier for the sensor
     '''
-    def __init__(self):
+    def __init__(self, psname):
         self.uid=uuid.uuid4() #generates a random uuid for the sensor
         self.value=0.0
         self.measureTime=dt.datetime.today()
+        self.name=psname
     '''
     value setter
     '''
@@ -53,6 +54,7 @@ class temperatureObserver :
         report['messageTime']=str(dt.datetime.today().isoformat())
         message={}
         message["entityID"]=str(self.uid)
+        message["entityName"]=self.name
         message["entityType"]={"en":"temperature Sensor","es":"sensor de temperatura"}
         message["measureUnit"]="Celsius"
         message["valueTime"]=str(self.measureTime.isoformat())

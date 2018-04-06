@@ -1,0 +1,20 @@
+'''Simulación de un motor'''
+from tempObserver import temperatureObserver as to
+
+s1=to("Sensor armadura")
+s2=to("Sensor rodamiento")
+s3=to("Sensor polea de motor")
+s4=to("Sensor polea de carga")
+s1.simulateValue(22,50)
+s2.simulateValue(22,50)
+s3.simulateValue(22,50)
+s4.simulateValue(22,50)
+print("====")
+print(s1.getReport())
+print("====")
+print(s2.getReport())
+print("====")
+print(s3.getReport())
+print("====")
+print(s4.getReport())
+print("====")
