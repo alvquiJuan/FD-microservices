@@ -65,13 +65,13 @@ class ThermalRules:
         rules[2]=ctrl.Rule(tc1['low']&tc2['low']&tc3['medium']&tc4['low'], condition['slight'],label='1brb')
         rules[3]=ctrl.Rule(tc1['medium']&tc2['low']&tc3['low']&tc4['negligible'], condition['major'],label='2brb')
         rules[4]=ctrl.Rule(tc1['low']&tc2['medium']&tc3['negligible']&tc4['medium'], condition['slight'],label='bd')
-        rules[5]=ctrl.Rule(tc1['medium']&tc2['medium']&tc3['medium']&(tc4['medium']|tc4['high']), condition['major'],label='unb')
+        rules[5]=ctrl.Rule(tc1['medium']&tc2['medium']&tc3['high']&tc4['high'], condition['major'],label='unb')
         rules[6]=ctrl.Rule(tc1['negligible']&tc2['negligible']&tc3['negligible']&tc4['low'], condition['slight'],label='vunb')
         rules[7]=ctrl.Rule(tc1['extreme']&tc2['extreme']&tc3['extreme']&tc4['extreme'], condition['critical'],label='MAL')
-        motor_ctrl = ctrl.ControlSystem(rules)
+        self.motor_ctrl = ctrl.ControlSystem(rules)
 
         #simulation for the motor condition
-        self.motor = ctrl.ControlSystemSimulation(motor_ctrl)
+        self.motor = ctrl.ControlSystemSimulation(self.motor_ctrl)
 
     '''
     method for motor evaluation
@@ -87,12 +87,18 @@ class ThermalRules:
         self.motor.input['tc2'] = processed_tc2
         self.motor.input['tc3'] = processed_tc3
         self.motor.input['tc4'] = processed_tc4
+        # for rule in self.motor_ctrl.rules:
+        #     print(self.motor.compute_rule(rule))
         self.motor.compute()
         return (self.motor.output['condition'])
 
 myThermal=ThermalRules()
-#healthy motor
-print('healthy motor status:', myThermal.compute_status(0,0,0,0))
+
+print('healthy motor status: ', myThermal.compute_status(0,0,0,0))
 print('half broken rotor motor status:', myThermal.compute_status(6.03,5.63,4.83,5.33))
 print('one broken rotor motor status:', myThermal.compute_status(3.43,3.07,5.03,3.67))
 print('two broken rotor motor status:', myThermal.compute_status(4.5,2.73,2.87,1.4))
+#print('Bearing defect motor status:', myThermal.compute_status(5.3,8.97,0,7.3))
+print('mechanical unbalance motor status:', myThermal.compute_status(8.03,5.95,12.03,9.5))
+#print('voltage unbalance motor status:', myThermal.compute_status(0,0,0,6))
+#print('Misaligned motor status:', myThermal.compute_status(32.73,28.2,39.77,25.93))
