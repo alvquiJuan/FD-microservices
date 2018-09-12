@@ -1,3 +1,7 @@
+version: '2'
+
+services:
+
 web:
   build: .
   command: python -u app.py
@@ -9,3 +13,5 @@ web:
     - db
 db:
   image: mongo:3.0.2
+
+
