@@ -7,8 +7,7 @@ import fuzzy_motor as fm
 app = Flask(__name__)
 
 client = MongoClient(
-    os.environ['DB_PORT_27017_TCP_ADDR'],
-    27017)
+    'db',27017)
 db = client.fdarch
 
 
@@ -16,7 +15,7 @@ db = client.fdarch
 def index():
 
 
-    return "Sorry index do nothing yet"
+    return render_template('index.html')
 
 
 @app.route('/register', methods=['POST'])

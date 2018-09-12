@@ -2,16 +2,16 @@ version: '2'
 
 services:
 
-web:
-  build: .
-  command: python -u app.py
-  ports:
-    - "5000:5000"
-  volumes:
-    - .:/microservices
-  links:
-    - db
-db:
-  image: mongo:3.0.2
+  web:
+    build: .
+    command: python -u app.py
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/microservices
+    links:
+      - db
+  db:
+    image: mongo:3.0.2
 
 
