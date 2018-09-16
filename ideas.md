@@ -1,5 +1,5 @@
 == Ideas and work to do ==
-* escribir reglas difusas
+* ~~escribir reglas difusas~~
 * SIMULAR resultados!!!
 * Crear almacenamiento de variables e informes
 * install MQTT server in compose

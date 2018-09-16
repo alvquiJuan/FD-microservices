@@ -2,3 +2,4 @@ Flask
 pymongo
 numpy
 matplotlib
+paho-mqtt
