@@ -92,12 +92,18 @@ class ThermalRules:
         self.motor.compute()
         return (self.motor.output['condition'])
 
-#myThermal=ThermalRules()
+myThermal=ThermalRules()
 
 ##myThermal.condition.view()
 #input("press a key to continue...")
-
-# print('healthy motor status: ', myThermal.compute_status(0,0,0,0))
+print("bearing defect")
+for i in range (10):
+    temperatures=30*np.random.rand(4)+15
+    temperatures[0]=np.clip(temperatures[0],30,45)
+    temperatures[1]=np.clip(temperatures[1],15,29)
+    temperatures[2]=np.clip(temperatures[2],30,45)
+    temperatures[3]=np.clip(temperatures[3],15,29)
+    print( myThermal.compute_status(temperatures[0],temperatures[1],temperatures[2],temperatures[3]))
 # print('half broken rotor motor status:', myThermal.compute_status(6.03,5.63,4.83,5.33))
 # print('one broken rotor motor status:', myThermal.compute_status(3.43,3.07,5.03,3.67))
 # print('two broken rotor motor status:', myThermal.compute_status(4.5,2.73,2.87,1.4))

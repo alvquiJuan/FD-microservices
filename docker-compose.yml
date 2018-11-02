@@ -4,14 +4,20 @@ services:
 
   web:
     build: .
-    command: python -u app.py
+    command: python -u motorObserver.py
     ports:
       - "5000:5000"
     volumes:
       - .:/microservices
     links:
       - db
+      - mqtt
   db:
     image: mongo:3.0.2
+
+  mqtt:
+        image: eclipse-mosquitto
+        ports:
+            - "1883:1883"
 
 

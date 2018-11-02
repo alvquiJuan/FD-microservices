@@ -17,9 +17,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, message):
     theMessage=json.loads(message.payload.decode("utf-8"))
     theVal=theMessage["message"]["Value"]
-    # veredict="rotten"
-    # if (theVal<5.0):
-    #     veredict="fresh"
+   
        
     print('message received ',theVal)
 
@@ -31,7 +29,7 @@ client.on_connect=on_connect
 client.on_message=on_message
 
 print('starting connection')
-client.connect_async('localhost', 1883, 60)
+client.connect_async('mqtt', 1883, 60)
 print('loop start')  
 client.loop_start()
 
